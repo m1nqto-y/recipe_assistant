@@ -1,40 +1,31 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id("com.android.application") version "8.1.0"
+    id("kotlin-android") version "1.9.20" // 最新バージョンに更新（プロジェクトに応じて調整）
     id("dev.flutter.flutter-gradle-plugin")
 }
 
 android {
-    namespace = "com.m1nqto.recipe.assistant.recipe_assistant"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-    }
+    compileSdk = 33
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.m1nqto.recipe.assistant.recipe_assistant"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+        applicationId = "com.m1nqto.recipe_assistant"
+        minSdk = 21
+        targetSdk = 33
+        versionCode = 1
+        versionName = "1.0"
     }
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+        }
+    }
+
+    sourceSets {
+        named("main") {
+            java.srcDirs += "build/generated/source/buildConfig/debug"
+            res.srcDirs += "build/generated/res/resValues/debug"
         }
     }
 }

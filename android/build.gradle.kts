@@ -1,9 +1,4 @@
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
+// allprojects.repositories ブロックを削除
 
 val newBuildDir: Directory = rootProject.layout.buildDirectory.dir("../../build").get()
 rootProject.layout.buildDirectory.value(newBuildDir)
