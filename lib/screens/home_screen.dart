@@ -74,76 +74,75 @@ class HomeScreenState extends State<HomeScreen> {
     super.initState();
     _screens = [
       // あなたタブ（仮のプレースホルダー）
-      Center(
-        child: Text('あなた画面', style: TextStyle(fontSize: 24)),
+      Container(
+        color: Colors.white, // 背景を白に統一
+        child: Center(
+          child: Text('あなた画面', style: TextStyle(fontSize: 24)),
+        ),
       ),
       // ホームタブ（画像アップロード画面）
       LayoutBuilder(
         builder: (context, constraints) {
           return Container(
-            color: Colors.lightBlue[100], // 背景を薄い青に設定
+            color: Colors.white, // 背景を白に統一
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // テキスト（上部に固定、レスポンシブ対応）
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    vertical: constraints.maxHeight * 0.05, // 画面高さの5%
-                    horizontal: constraints.maxWidth * 0.1, // 画面幅の10%
+                    vertical: constraints.maxHeight * 0.05,
+                    horizontal: constraints.maxWidth * 0.1,
                   ),
                   child: Text(
                     '食材を撮影してレシピを検索',
                     style: TextStyle(
-                      fontSize: constraints.maxWidth > 600 ? 28 : 20, // 幅に応じてフォントサイズ調整
+                      fontSize: constraints.maxWidth > 600 ? 28 : 20,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
                   ),
                 ),
-                // イラストのプレースホルダー（レスポンシブ対応）
                 Container(
-                  width: constraints.maxWidth > 600 ? 250 : 200, // 幅に応じてサイズ調整
+                  width: constraints.maxWidth > 600 ? 250 : 200,
                   height: constraints.maxWidth > 600 ? 250 : 200,
                   decoration: BoxDecoration(
-                    color: Colors.blue[200], // 仮の青い円
+                    color: Colors.blue[200],
                     shape: BoxShape.circle,
                   ),
                   child: Icon(Icons.camera_alt, size: constraints.maxWidth > 600 ? 120 : 100, color: Colors.white),
                 ),
-                SizedBox(height: constraints.maxHeight * 0.03), // レスポンシブな間隔
-                // ボタン（レスポンシブ対応）
+                SizedBox(height: constraints.maxHeight * 0.03),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.1),
                   child: ElevatedButton(
-                    onPressed: () => _pickImage(context), // ここで直接メソッドを呼び出し
+                    onPressed: () => _pickImage(context),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue, // ボタンを青色に
+                      backgroundColor: Colors.blue,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12), // 角丸
+                        borderRadius: BorderRadius.circular(12),
                       ),
                       padding: EdgeInsets.symmetric(
-                        horizontal: constraints.maxWidth * 0.1, // 幅の10%
-                        vertical: constraints.maxHeight * 0.02, // 高さの2%
+                        horizontal: constraints.maxWidth * 0.1,
+                        vertical: constraints.maxHeight * 0.02,
                       ),
                     ),
                     child: Text(
                       '撮影・アップロード',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: constraints.maxWidth > 600 ? 18 : 16, // 幅に応じてフォントサイズ調整
+                        fontSize: constraints.maxWidth > 600 ? 18 : 16,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: constraints.maxHeight * 0.02), // レスポンシブな間隔
-                // 説明テキスト（レスポンシブ対応）
+                SizedBox(height: constraints.maxHeight * 0.02),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.1),
                   child: Text(
-                    '食材を撮影すると自動的に認識し\nプラン・レシピを確認して利用できます 安心です。',
+                    '食材を撮影すると自動的に認識し、レシピを検索できます。',
                     style: TextStyle(
-                      fontSize: constraints.maxWidth > 600 ? 16 : 14, // 幅に応じてフォントサイズ調整
+                      fontSize: constraints.maxWidth > 600 ? 16 : 14,
                       color: Colors.blue[900],
                     ),
                     textAlign: TextAlign.center,
@@ -155,8 +154,11 @@ class HomeScreenState extends State<HomeScreen> {
         },
       ),
       // メニュータブ（仮のプレースホルダー）
-      Center(
-        child: Text('メニュー画面', style: TextStyle(fontSize: 24)),
+      Container(
+        color: Colors.white, // 背景を白に統一
+        child: Center(
+          child: Text('メニュー画面', style: TextStyle(fontSize: 24)),
+        ),
       ),
     ];
   }
@@ -170,27 +172,38 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('レシピアシスタント')),
-      body: _screens[_selectedIndex], // 選択されたタブの内容を表示
+      appBar: AppBar(
+        title: const Text('レシピアシスタント'),
+        backgroundColor: Colors.white, // AppBar の背景を白に変更
+        elevation: 0, // 影をなくす（オプション）
+        titleTextStyle: TextStyle(
+          color: Colors.black, // タイトル文字を黒に変更
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      body: _screens[_selectedIndex],
+      backgroundColor: Colors.white, // Scaffold の背景を白に統一
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.person), // あなたアイコン（人物）
+            icon: Icon(Icons.person),
             label: 'あなた',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home), // ホームアイコン
+            icon: Icon(Icons.home),
             label: 'ホーム',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.menu), // メニューアイコン
+            icon: Icon(Icons.menu),
             label: 'メニュー',
           ),
         ],
         currentIndex: _selectedIndex,
-        onTap: _onItemTapped, // タップ時に呼び出されるコールバック
-        selectedItemColor: Colors.blue, // 選択時の色を青に
-        unselectedItemColor: Colors.grey, // 未選択時の色をグレーに
+        onTap: _onItemTapped,
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.white, // BottomNavigationBar の背景を白に変更
       ),
     );
   }
